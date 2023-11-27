@@ -1,17 +1,13 @@
 let numbers = [9, 8, 1, 0, 3, 1, 2, 1, 0, 6];
-
-function countRepetition(arr) {
-    return arr.reduce((element, count) => {
-        if (!element[count]) {
-            element = { ...element, [count]: 1 };
-            return element;
-        } else {
-            element = { ...element, [count]: ++element[count] };
-            return element;
+function maxRepeat(arr) {
+    const result = arr.reduce((acc, current) => {
+        acc[current] = (acc[current] || 0) + 1;
+        if (!acc.max || acc[current] > acc[acc.max]) {
+            acc.max = current;
         }
-    });
+        return acc;
+
+    }, { max: null });
+    return result;
 }
-
-
-let ans = countRepetition(numbers);
-console.log(ans);
+console.log(maxRepeat(numbers));
